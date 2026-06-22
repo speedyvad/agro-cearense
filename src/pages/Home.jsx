@@ -94,7 +94,14 @@ export default function Home({ navigate }) {
   const heroRef  = useRef(null)
   const quoteRef = useRef(null)
   const [hovered, setHovered] = useState(null)
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768)
   const quoteInView = useInView(quoteRef, { once: true, margin: '-80px' })
+
+  useEffect(() => {
+    const handler = () => setIsMobile(window.innerWidth <= 768)
+    window.addEventListener('resize', handler)
+    return () => window.removeEventListener('resize', handler)
+  }, [])
 
   const { scrollYProgress } = useScroll({ target: heroRef, offset: ['start start', 'end start'] })
   const heroOp = useTransform(scrollYProgress, [0, 0.7], [1, 0])
@@ -130,9 +137,15 @@ export default function Home({ navigate }) {
 
         {/* LAYER 2 — content */}
         <motion.div style={{
-          position: 'absolute', zIndex: 2,
-          left: '50%', transform: 'translateX(-50%)',
-          maxWidth: '580px', textAlign: 'center',
+          position: isMobile ? 'relative' : 'absolute',
+          zIndex: 2,
+          left: isMobile ? 'auto' : '50%',
+          top: isMobile ? 'auto' : '50%',
+          transform: isMobile ? 'none' : 'translate(-50%, -50%)',
+          padding: isMobile ? '6rem 1.5rem 3rem' : undefined,
+          maxWidth: isMobile ? '100%' : '580px',
+          textAlign: 'center',
+          width: '100%',
           opacity: heroOp,
         }}>
           {/* Eyebrow */}
@@ -158,7 +171,7 @@ export default function Home({ navigate }) {
               initial={{ y: '100%' }}
               animate={{ y: 0 }}
               transition={{ duration: 0.9, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
-              style={{ fontFamily: 'var(--serif)', fontSize: 'clamp(3rem, 7vw, 6.5rem)', fontWeight: 300, lineHeight: 1.05, color: 'var(--cream)', letterSpacing: '-0.02em' }}
+              style={{ fontFamily: 'var(--serif)', fontSize: 'clamp(2rem, 8vw, 6.5rem)', fontWeight: 300, lineHeight: 1.05, color: 'var(--cream)', letterSpacing: '-0.02em' }}
             >
               Há 20 anos,
             </motion.h1>
@@ -168,7 +181,7 @@ export default function Home({ navigate }) {
               initial={{ y: '100%' }}
               animate={{ y: 0 }}
               transition={{ duration: 0.9, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
-              style={{ fontFamily: 'var(--serif)', fontSize: 'clamp(3rem, 7vw, 6.5rem)', fontWeight: 300, lineHeight: 1.05, color: 'var(--cream)', letterSpacing: '-0.02em' }}
+              style={{ fontFamily: 'var(--serif)', fontSize: 'clamp(2rem, 8vw, 6.5rem)', fontWeight: 300, lineHeight: 1.05, color: 'var(--cream)', letterSpacing: '-0.02em' }}
             >
               toda segunda-feira,
             </motion.h1>
@@ -178,7 +191,7 @@ export default function Home({ navigate }) {
               initial={{ y: '100%' }}
               animate={{ y: 0 }}
               transition={{ duration: 0.9, delay: 0.55, ease: [0.22, 1, 0.36, 1] }}
-              style={{ fontFamily: 'var(--serif)', fontSize: 'clamp(3rem, 7vw, 6.5rem)', fontWeight: 300, lineHeight: 1.05, fontStyle: 'italic', color: 'var(--gold)', letterSpacing: '-0.02em' }}
+              style={{ fontFamily: 'var(--serif)', fontSize: 'clamp(2rem, 8vw, 6.5rem)', fontWeight: 300, lineHeight: 1.05, fontStyle: 'italic', color: 'var(--gold)', letterSpacing: '-0.02em' }}
             >
               uma ideia senta à mesa.
             </motion.h1>
@@ -198,11 +211,11 @@ export default function Home({ navigate }) {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.95 }}
-            style={{ display: 'flex', gap: '1rem', alignItems: 'center', justifyContent: 'center' }}
+            style={{ display: 'flex', flexDirection: isMobile ? 'column' : 'row', gap: isMobile ? '0.75rem' : '1rem', alignItems: 'center', justifyContent: 'center' }}
           >
             <button
               onClick={() => navigate('timeline')}
-              style={{ background: 'var(--gold)', color: 'var(--bg)', border: 'none', padding: '14px 32px', fontFamily: 'var(--sans)', fontWeight: 500, fontSize: '0.75rem', letterSpacing: '0.12em', textTransform: 'uppercase', borderRadius: '2px', transition: 'all 0.25s' }}
+              style={{ background: 'var(--gold)', color: 'var(--bg)', border: 'none', padding: '14px 32px', fontFamily: 'var(--sans)', fontWeight: 500, fontSize: '0.75rem', letterSpacing: '0.12em', textTransform: 'uppercase', borderRadius: '2px', transition: 'all 0.25s', width: isMobile ? '100%' : 'auto', maxWidth: '320px' }}
               onMouseEnter={e => e.currentTarget.style.background = 'var(--gold2)'}
               onMouseLeave={e => e.currentTarget.style.background = 'var(--gold)'}
             >
@@ -210,7 +223,7 @@ export default function Home({ navigate }) {
             </button>
             <button
               onClick={() => navigate('encontros')}
-              style={{ background: 'transparent', color: 'var(--cream)', border: '1px solid rgba(201,169,110,0.3)', padding: '13px 28px', fontFamily: 'var(--sans)', fontWeight: 400, fontSize: '0.75rem', letterSpacing: '0.12em', textTransform: 'uppercase', borderRadius: '2px', transition: 'all 0.25s' }}
+              style={{ background: 'transparent', color: 'var(--cream)', border: '1px solid rgba(201,169,110,0.3)', padding: '13px 28px', fontFamily: 'var(--sans)', fontWeight: 400, fontSize: '0.75rem', letterSpacing: '0.12em', textTransform: 'uppercase', borderRadius: '2px', transition: 'all 0.25s', width: isMobile ? '100%' : 'auto', maxWidth: '320px' }}
               onMouseEnter={e => e.currentTarget.style.borderColor = 'rgba(201,169,110,0.8)'}
               onMouseLeave={e => e.currentTarget.style.borderColor = 'rgba(201,169,110,0.3)'}
             >
@@ -238,7 +251,7 @@ export default function Home({ navigate }) {
       {/* ── STATS ── */}
       <section style={{ padding: '6rem 3rem', borderTop: '1px solid var(--border)' }}>
         <FadeIn delay={0}>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: '1px', background: 'var(--border)' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: isMobile ? 'repeat(2,1fr)' : 'repeat(4,1fr)', gap: '1px', background: 'var(--border)' }}>
             {stats.map((s, i) => (
               <div key={s.num} style={{ background: 'var(--bg2)', padding: '3rem 2rem', textAlign: 'center' }}>
                 <motion.div
@@ -323,7 +336,7 @@ export default function Home({ navigate }) {
 
         <div style={{
           display: 'grid',
-          gridTemplateColumns: '2fr 1fr 1fr',
+          gridTemplateColumns: isMobile ? '1fr' : '2fr 1fr 1fr',
           gridTemplateRows: 'auto',
           gap: '2px',
           background: 'var(--border)',
@@ -335,9 +348,11 @@ export default function Home({ navigate }) {
               onHoverEnd={() => setHovered(null)}
               style={{
                 position: 'relative', overflow: 'hidden',
-                minHeight: c.tall ? '420px' : '220px',
-                gridRow: c.gridRow,
-                gridColumn: c.gridColumn,
+                minHeight: isMobile
+                  ? (c.gridColumn === '1 / span 3' ? '180px' : '200px')
+                  : (c.tall ? '420px' : '220px'),
+                gridRow: isMobile ? 'auto' : c.gridRow,
+                gridColumn: isMobile ? 'auto' : c.gridColumn,
               }}
             >
               {/* Background image */}
@@ -359,7 +374,8 @@ export default function Home({ navigate }) {
               {/* Static bottom content */}
               <div style={{
                 position: 'absolute', bottom: 0, left: 0, right: 0,
-                padding: '1.5rem', zIndex: 2,
+                padding: '1rem', zIndex: 2,
+                background: 'linear-gradient(to top, rgba(14,11,8,0.9) 0%, transparent 100%)',
               }}>
                 <div style={{ fontSize: '1.6rem', marginBottom: '8px' }}>{c.icon}</div>
                 <div style={{ fontFamily: 'var(--serif)', fontSize: '1.15rem', color: 'var(--cream)' }}>
@@ -368,7 +384,7 @@ export default function Home({ navigate }) {
               </div>
 
               {/* Hover desc panel */}
-              <AnimatePresence>
+              {!isMobile && <AnimatePresence>
                 {hovered === i && (
                   <motion.div
                     initial={{ y: '100%', opacity: 0 }}
@@ -392,7 +408,7 @@ export default function Home({ navigate }) {
                     </div>
                   </motion.div>
                 )}
-              </AnimatePresence>
+              </AnimatePresence>}
             </motion.div>
           ))}
         </div>
