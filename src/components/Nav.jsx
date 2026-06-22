@@ -1,4 +1,5 @@
-import { motion } from 'framer-motion'
+import { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 
 const links = [
   { id: 'home',      label: 'Início' },
@@ -9,6 +10,8 @@ const links = [
 ]
 
 export default function Nav({ current, navigate }) {
+  const [menuOpen, setMenuOpen] = useState(false)
+
   return (
     <motion.nav
       initial={{ opacity: 0, y: -20 }}
@@ -75,6 +78,64 @@ export default function Nav({ current, navigate }) {
       }}>
         2006 — 2026
       </div>
+
+      <button
+        className="nav-hamburger"
+        onClick={() => setMenuOpen(!menuOpen)}
+        style={{
+          display: 'none',
+          background: 'none', border: 'none',
+          color: 'var(--cream)', fontSize: '1.4rem',
+          padding: '4px 8px', lineHeight: 1,
+        }}
+      >
+        {menuOpen ? '✕' : '☰'}
+      </button>
+
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.2 }}
+            style={{
+              position: 'fixed',
+              top: '56px', left: 0, right: 0,
+              background: 'rgba(26,24,20,0.98)',
+              backdropFilter: 'blur(20px)',
+              borderBottom: '1px solid var(--border)',
+              padding: '1rem 1.5rem 1.5rem',
+              zIndex: 999,
+              display: 'flex', flexDirection: 'column', gap: '0',
+            }}
+          >
+            {[
+              { id: 'home', label: 'Início' },
+              { id: 'timeline', label: 'Linha do Tempo' },
+              { id: 'pessoas', label: 'Personagens' },
+              { id: 'encontros', label: 'Encontros' },
+              { id: 'admin', label: 'Admin' },
+            ].map(l => (
+              <button
+                key={l.id}
+                onClick={() => { navigate(l.id); setMenuOpen(false) }}
+                style={{
+                  background: 'none', border: 'none',
+                  borderBottom: '1px solid var(--border)',
+                  padding: '1rem 0',
+                  fontFamily: 'var(--sans)', fontWeight: 400,
+                  fontSize: '0.95rem', letterSpacing: '0.06em',
+                  color: current === l.id ? 'var(--gold)' : 'var(--muted)',
+                  textAlign: 'left', width: '100%',
+                }}
+              >
+                {l.label}
+              </button>
+            ))}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.nav>
   )
 }

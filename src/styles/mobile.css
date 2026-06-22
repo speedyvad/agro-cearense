@@ -1,0 +1,228 @@
+/* ─── GLOBAL ─── */
+@media (max-width: 768px) {
+  body { cursor: auto !important; }
+  #cursor { display: none !important; }
+
+  /* ─── NAV ─── */
+  nav {
+    padding: 0 1.25rem !important;
+    height: 56px !important;
+  }
+  nav ul,
+  nav > div:last-child {
+    display: none !important;
+  }
+  nav button:first-child {
+    font-size: 0.85rem !important;
+  }
+
+  /* ─── HOME HERO ─── */
+  section[data-hero],
+  section[style*="100svh"] {
+    height: auto !important;
+    min-height: 100svh !important;
+  }
+
+  /* Hero content — override absolute centering */
+  section[data-hero] > div[style*="position:absolute"][style*="left:50%"],
+  section[data-hero] > div[style*="position: absolute"][style*="left: 50%"] {
+    position: relative !important;
+    left: auto !important;
+    top: auto !important;
+    transform: none !important;
+    padding: 7rem 1.5rem 4rem !important;
+    max-width: 100% !important;
+    text-align: center !important;
+  }
+
+  /* Hero title font size */
+  section[data-hero] h1 {
+    font-size: clamp(2.2rem, 10vw, 3rem) !important;
+    line-height: 1.1 !important;
+  }
+
+  /* Hero paragraph */
+  section[data-hero] p {
+    font-size: 0.9rem !important;
+    max-width: 100% !important;
+    margin: 0 auto 2rem !important;
+  }
+
+  /* Hero buttons */
+  section[data-hero] > div[style*="position:absolute"] > div:last-child,
+  section[data-hero] > div[style*="position: absolute"] > div:last-child {
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 0.75rem !important;
+  }
+
+  section[data-hero] button {
+    width: 100% !important;
+    max-width: 280px !important;
+  }
+
+  /* Scroll hint */
+  section[data-hero] > div[style*="position:absolute"][style*="bottom"] {
+    display: none !important;
+  }
+
+  /* ─── STATS GRID ─── */
+  div[style*="grid-template-columns: repeat(4"] {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  /* ─── QUOTE SECTION ─── */
+  section[style*="text-align: center"] blockquote p,
+  section[style*="textAlign: center"] blockquote p {
+    font-size: 1.2rem !important;
+  }
+
+  /* ─── CADEIAS GRID ─── */
+  div[style*="grid-template-columns: 2fr 1fr 1fr"] {
+    grid-template-columns: 1fr 1fr !important;
+  }
+
+  div[style*="grid-template-columns: 2fr 1fr 1fr"] > div[style*="grid-column"] {
+    grid-column: 1 / -1 !important;
+  }
+
+  /* ─── SECTIONS PADDING ─── */
+  section[style*="padding: 6rem 3rem"],
+  section[style*="padding: 5rem 3rem"],
+  section[style*="padding: 4rem 3.5rem"],
+  section[style*="padding: 4rem 3rem"] {
+    padding: 3rem 1.25rem !important;
+  }
+
+  /* ─── TIMELINE ─── */
+  /* Horizontal scroll container — allow it but make cards narrower */
+  div[style*="overflow-x: auto"],
+  div[style*="overflowX: auto"] {
+    padding-bottom: 1rem !important;
+  }
+
+  /* Timeline cards width on mobile */
+  div[style*="width: 320px"],
+  div[style*="width:320px"] {
+    width: 260px !important;
+    min-height: 420px !important;
+  }
+
+  div[style*="width: 520px"],
+  div[style*="width:520px"] {
+    width: 300px !important;
+  }
+
+  /* Timeline page header */
+  #screen-timeline h1,
+  main h1[style*="4.5rem"] {
+    font-size: clamp(2rem, 8vw, 3rem) !important;
+  }
+
+  /* ─── PESSOAS GRID ─── */
+  div[style*="grid-template-columns: repeat(3,1fr)"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Person modal */
+  div[style*="position:fixed"][style*="zIndex:50"],
+  div[style*="position: fixed"][style*="z-index: 50"] {
+    padding: 1rem !important;
+    align-items: flex-end !important;
+  }
+
+  div[style*="position:fixed"][style*="zIndex:50"] > div,
+  div[style*="position: fixed"][style*="z-index: 50"] > div {
+    width: 100% !important;
+    max-width: 100% !important;
+    border-radius: 8px 8px 0 0 !important;
+    max-height: 85svh !important;
+    overflow-y: auto !important;
+  }
+
+  /* ─── ENCONTROS ─── */
+  /* Search bar */
+  div[style*="max-width: 400px"],
+  div[style*="maxWidth: 400px"] {
+    max-width: 100% !important;
+  }
+
+  /* Featured encontro */
+  div[style*="grid-column: 1 / -1"],
+  div[style*="gridColumn: '1 / -1'"] {
+    grid-column: 1 / -1 !important;
+  }
+
+  /* Encontros 2-col grid */
+  div[style*="grid-template-columns: 1fr 1fr"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Artigos acervo 3-col grid */
+  div[style*="grid-template-columns: repeat(3,1fr)"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  div[style*="grid-template-columns: repeat(3, 1fr)"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* ─── ARTIGO PAGE ─── */
+  /* Hero height */
+  section[style*="72vh"] {
+    height: 55vmax !important;
+    min-height: 320px !important;
+  }
+
+  section[style*="72vh"] h1 {
+    font-size: clamp(1.4rem, 5vw, 2rem) !important;
+  }
+
+  section[style*="72vh"] > div[style*="padding: 3rem 3.5rem"],
+  section[style*="72vh"] > div[style*="padding: 3rem"] {
+    padding: 1.5rem !important;
+  }
+
+  /* Resumo and body offset — remove the left margin indent */
+  div[style*="marginLeft: 'clamp(2rem"],
+  div[style*="margin-left: clamp(2rem"] {
+    margin-left: 0 !important;
+    padding-left: 1.25rem !important;
+    padding-right: 1.25rem !important;
+  }
+
+  article[style*="marginLeft"] {
+    margin-left: 0 !important;
+    padding: 2rem 1.25rem 3rem !important;
+  }
+
+  article p {
+    font-size: 0.95rem !important;
+    line-height: 1.8 !important;
+  }
+
+  article blockquote p {
+    font-size: 1.15rem !important;
+  }
+
+  /* Relacionados — 3 col to 1 col */
+  section[style*="padding: 4rem 3.5rem"] div[style*="repeat(3"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* ─── FOOTER CTA ─── */
+  section[style*="flex-direction: column"] h2 {
+    font-size: clamp(1.4rem, 5vw, 2rem) !important;
+  }
+
+  /* ─── SECTION TITLES ─── */
+  h1[style*="clamp"],
+  h2[style*="clamp"] {
+    word-break: break-word !important;
+  }
+
+  /* ─── HAMBURGER ─── */
+  .nav-hamburger {
+    display: block !important;
+  }
+}
